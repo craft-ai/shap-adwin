@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "code"
+version = "0.1.0"
+description = "Code and data for reproducing results in the paper Shap Adwin as well as some more extended results"
+authors = ["BastienZim <bastien.zimmermann@imt-atlantique.net>"]
+
+[tool.poetry.dependencies]
+python =  ">=3.8,<3.11"
+numpy = "^1.21.3"
+shap = "^0.40.0"
+matplotlib = "^3.4.3"
+lightgbm = "^3.3.0"
+scikit-multiflow = "^0.5.3"
+DateTime = "^4.3"
+jupyter = "^1.0.0"
+ipykernel = "^6.4.2"
+autopep8 = "^1.5.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
