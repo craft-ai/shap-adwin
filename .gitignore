@@ -1,0 +1,10 @@
+# Jupyter Notebook
+.ipynb_checkpoints
+
+__pycache__
+
+# Environments
+.env
+venv/*
+*.arff
+

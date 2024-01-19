@@ -1,0 +1,2 @@
+def printisOK():
+    print("ISOK")

@@ -1,0 +1,422 @@
+
+@article{chen_true_2020,
+	title = {True to the {Model} or {True} to the {Data}?},
+	language = {en},
+	journal = {arXiv:2006.16234 [cs, stat]},
+	author = {Chen, Hugh and Janizek, Joseph D. and Lundberg, Scott and Lee, Su-In},
+	month = jun,
+	year = {2020},
+	note = {arXiv: 2006.16234},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning}
+}
+
+@article{lundberg2020local2global,
+  title={From local explanations to global understanding with explainable AI for trees},
+  author={Lundberg, Scott M. and Erion, Gabriel and Chen, Hugh and DeGrave, Alex and Prutkin, Jordan M. and Nair, Bala and Katz, Ronit and Himmelfarb, Jonathan and Bansal, Nisha and Lee, Su-In},
+  journal={Nature Machine Intelligence},
+  year={2020},
+  publisher={Nature Publishing Group}
+}
+
+@incollection{NIPS2017_7062,
+title = {A Unified Approach to Interpreting Model Predictions},
+author = {Lundberg, Scott M and Lee, Su-In},
+booktitle = {Advances in Neural Information Processing Systems 30},
+year = {2017},
+}
+
+@article{souza_challenges_2020,
+	title = {Challenges in benchmarking stream learning algorithms with real-world data},
+	volume = {34},
+	issn = {1384-5810, 1573-756X},
+	language = {en},
+	number = {6},
+	journal = {Data Mining and Knowledge Discovery},
+	author = {Souza, Vinicius M. A. and dos Reis, Denis M. and Maletzke, André G. and Batista, Gustavo E. A. P. A.},
+	month = nov,
+	year = {2020},
+	pages = {1805--1858}
+}
+
+@article{klaise_monitoring_2020,
+	title = {Monitoring and explainability of models in production},
+	journal = {arXiv:2007.06299 [cs, stat]},
+	author = {Klaise, Janis and Van Looveren, Arnaud and Cox, Clive and Vacanti, Giovanni and Coca, Alexandru},
+	month = jul,
+	year = {2020},
+	note = {arXiv: 2007.06299},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning}
+}
+
+@article{gomes_adaptive_2017,
+	title = {Adaptive random forests for evolving data stream classification},
+	volume = {106},
+	issn = {1573-0565},
+	abstract = {Random forests is currently one of the most used machine learning algorithms in the non-streaming (batch) setting. This preference is attributable to its high learning performance and low demands with respect to input preparation and hyper-parameter tuning. However, in the challenging context of evolving data streams, there is no random forests algorithm that can be considered state-of-the-art in comparison to bagging and boosting based algorithms. In this work, we present the adaptive random forest (ARF) algorithm for classification of evolving data streams. In contrast to previous attempts of replicating random forests for data stream learning, ARF includes an effective resampling method and adaptive operators that can cope with different types of concept drifts without complex optimizations for different data sets. We present experiments with a parallel implementation of ARF which has no degradation in terms of classification performance in comparison to a serial implementation, since trees and adaptive operators are independent from one another. Finally, we compare ARF with state-of-the-art algorithms in a traditional test-then-train evaluation and a novel delayed labelling evaluation, and show that ARF is accurate and uses a feasible amount of resources.},
+	language = {en},
+	number = {9},
+	journal = {Mach Learn},
+	author = {Gomes, Heitor M. and Bifet, Albert and Read, Jesse and Barddal, Jean Paul and Enembreck, Fabrício and Pfharinger, Bernhard and Holmes, Geoff and Abdessalem, Talel},
+	month = oct,
+	year = {2017},
+	pages = {1469--1495}
+}
+
+@book{bifet_learning_2007,
+	title = {Learning from {Time}-{Changing} {Data} with {Adaptive} {Windowing}},
+	volume = {7},
+	abstract = {We present a new approach for dealing with distribution change and concept drift when learning from data sequences that may vary with time. We use sliding windows whose size, instead of being fixed a priori, is recomputed online according to the rate of change observed from the data in the window itself. This delivers the user or programmer from having to guess a time-scale for change. Contrary to many related works, we provide rigorous guarantees of performance, as bounds on the rates of false positives and false negatives. Using ideas from data stream algorithmics, we develop a time-and memory-efficient version of this algorithm, called ADWIN2. We show how to combine ADWIN2 with the Naïve Bayes (NB) predictor, in two ways: one, using it to monitor the error rate of the current model and declare when revision is necessary and, two, putting it inside the NB predictor to maintain up-to-date estimations of conditional probabilities in the data. We test our approach using synthetic and real data streams and compare them to both fixed-size and variable-size window strategies with good results.},
+	author = {Bifet, Albert and Gavaldà, Ricard},
+	month = apr,
+	year = {2007},
+	doi = {10.1137/1.9781611972771.42},
+	journal = {Proceedings of the 7th SIAM International Conference on Data Mining}
+}
+
+
+
+@article{Chen_attributions,
+  author    = {Hugh Chen and
+               Scott M. Lundberg and
+               Su{-}In Lee},
+  title     = {Explaining a Series of Models by Propagating Local Feature Attributions},
+  journal   = {CoRR},
+  volume    = {abs/2105.00108},
+  year      = {2021},
+  archivePrefix = {arXiv},
+  eprint    = {2105.00108},
+  timestamp = {Wed, 12 May 2021 15:54:31 +0200},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@incollection{chen_explaining_2021,
+	address = {Cham},
+	series = {Studies in {Computational} {Intelligence}},
+	title = {Explaining {Models} by {Propagating} {Shapley} {Values} of {Local} {Components}},
+	isbn = {978-3-030-53352-6},
+	abstract = {In healthcare, making the best possible predictions with complex models (e.g., neural networks, ensembles/stacks of different models) can impact patient welfare. In order to make these complex models explainable, we present DeepSHAP for mixed model types, a framework for layer wise propagation of Shapley values that builds upon DeepLIFT (an existing approach for explaining neural networks). We show that in addition to being able to explain neural networks, this new framework naturally enables attributions for stacks of mixed models (e.g., neural network feature extractor into a tree model) as well as attributions of the loss. Finally, we theoretically justify a method for obtaining attributions with respect to a background distribution (under a Shapley value framework).},
+	language = {en},
+	booktitle = {Explainable {AI} in {Healthcare} and {Medicine}: {Building} a {Culture} of {Transparency} and {Accountability}},
+	publisher = {Springer International Publishing},
+	author = {Chen, Hugh and Lundberg, Scott and Lee, Su-In},
+	editor = {Shaban-Nejad, Arash and Michalowski, Martin and Buckeridge, David L.},
+	year = {2021},
+	doi = {10.1007/978-3-030-53352-6_24},
+	pages = {261--270}
+}
+
+@article{gama_survey_2014,
+	title = {A survey on concept drift adaptation},
+	volume = {46},
+	issn = {0360-0300},
+	abstract = {Concept drift primarily refers to an online supervised learning scenario when the relation between the input data and the target variable changes over time. Assuming a general knowledge of supervised learning in this article, we characterize adaptive learning processes; categorize existing strategies for handling concept drift; overview the most representative, distinct, and popular techniques and algorithms; discuss evaluation methodology of adaptive algorithms; and present a set of illustrative applications. The survey covers the different facets of concept drift in an integrated way to reflect on the existing scattered state of the art. Thus, it aims at providing a comprehensive introduction to the concept drift adaptation for researchers, industry analysts, and practitioners.},
+	number = {4},
+	journal = {ACM Comput. Surv.},
+	author = {Gama, João and Žliobaitė, Indrė and Bifet, Albert and Pechenizkiy, Mykola and Bouchachia, Abdelhamid},
+	month = mar,
+	year = {2014},
+	keywords = {adaptive learning, change detection, Concept drift, data streams},
+	pages = {44:1--44:37}
+}
+
+@inproceedings{gama_learning_2004,
+	title = {Learning with {Drift} {Detection}},
+	volume = {8},
+	isbn = {978-3-540-23237-7},
+	doi = {10.1007/978-3-540-28645-5_29},
+	abstract = {Most of the work in machine learning assume that examples are generated at random according to some stationary probability distribution. In this work we study the problem of learning when the distribution that generate the examples changes over time. We present a method for detection of changes in the probability distribution of examples. The idea behind the drift detection method is to control the online error-rate of the algorithm. The training examples are presented in sequence. When a new training example is available, it is classified using the actual model. Statistical theory guarantees that while the distribution is stationary, the error will decrease. When the distribution changes, the error will increase. The method controls the trace of the online error of the algorithm. For the actual context we define a warning level, and a drift level. A new context is declared, if in a sequence of examples, the error increases reaching the warning level at example kw, and the drift level at example kd. This is an indication of a change in the distribution of the examples. The algorithm learns a new model using only the examples since kw. The method was tested with a set of eight artificial datasets and a real world dataset. We used three learning algorithms: a perceptron, a neural network and a decision tree. The experimental results show a good performance detecting drift and with learning the new concept. We also observe that the method is independent of the learning algorithm.},
+	author = {Gama, João and Medas, Pedro and Castillo, Gladys and Rodrigues, Pedro},
+	month = sep,
+	year = {2004},
+	pages = {286--295}
+}
+
+
+
+ @InProceedings{pmlr-v70-shrikumar17a, title = {Learning Important Features Through Propagating Activation Differences}, author = {Avanti Shrikumar and Peyton Greenside and Anshul Kundaje}, booktitle = {Proceedings of the 34th International Conference on Machine Learning}, pages = {3145--3153}, year = {2017}, editor = {Precup, Doina and Teh, Yee Whye}, volume = {70}, series = {Proceedings of Machine Learning Research}, month = {06--11 Aug}, publisher = {PMLR}, abstract = {The purported “black box” nature of neural networks is a barrier to adoption in applications where interpretability is essential. Here we present DeepLIFT (Deep Learning Important FeaTures), a method for decomposing the output prediction of a neural network on a specific input by backpropagating the contributions of all neurons in the network to every feature of the input. DeepLIFT compares the activation of each neuron to its `reference activation’ and assigns contribution scores according to the difference. By optionally giving separate consideration to positive and negative contributions, DeepLIFT can also reveal dependencies which are missed by other approaches. Scores can be computed efficiently in a single backward pass. We apply DeepLIFT to models trained on MNIST and simulated genomic data, and show significant advantages over gradient-based methods. Video tutorial: http://goo.gl/qKb7pL code: http://goo.gl/RM8jvH} } 
+ 
+ 
+@article{Frechette_portfolio, title={Using the Shapley Value to Analyze Algorithm Portfolios}, volume={30}, abstractNote={ &lt;p&gt; Algorithms for NP-complete problems often have different strengths andweaknesses, and thus algorithm portfolios often outperform individualalgorithms. It is surprisingly difficult to quantify a component algorithm’s contributionto such a portfolio. Reporting a component’s standalone performance wronglyrewards near-clones while penalizing algorithms that have small but distinctareas of strength. Measuring a component’s marginal contribution to an existingportfolio is better, but penalizes sets of strongly correlated algorithms,thereby obscuring situations in which it is essential to have at least onealgorithm from such a set. This paper argues for analyzing component algorithmcontributions via a measure drawn from coalitional game theory---the Shapleyvalue---and yields insight into a research community’s progress over time. Weconclude with an application of the analysis we advocate to SAT competitions,yielding novel insights into the behaviour of algorithm portfolios, theircomponents, and the state of SAT solving technology. &lt;/p&gt; }, number={1}, journal={Proceedings of the AAAI Conference on Artificial Intelligence}, author={Fréchette, Alexandre and Kotthoff, Lars and Michalak, Tomasz and Rahwan, Talal and Hoos, Holger and Leyton-Brown, Kevin}, year={2016}, month={Mar.} }
+
+ @InProceedings{pmlr-v97-ghorbani19c, title = {Data Shapley: Equitable Valuation of Data for Machine Learning}, author = {Ghorbani, Amirata and Zou, James}, booktitle = {Proceedings of the 36th International Conference on Machine Learning}, pages = {2242--2251}, year = {2019}, editor = {Kamalika Chaudhuri and Ruslan Salakhutdinov}, volume = {97}, series = {Proceedings of Machine Learning Research}, month = {09--15 Jun}, publisher = {PMLR}, pdf = {http://proceedings.mlr.press/v97/ghorbani19c/ghorbani19c.pdf}, abstract = {As data becomes the fuel driving technological and economic growth, a fundamental challenge is how to quantify the value of data in algorithmic predictions and decisions. For example, in healthcare and consumer markets, it has been suggested that individuals should be compensated for the data that they generate, but it is not clear what is an equitable valuation for individual data. In this work, we develop a principled framework to address data valuation in the context of supervised machine learning. Given a learning algorithm trained on $n$ data points to produce a predictor, we propose data Shapley as a metric to quantify the value of each training datum to the predictor performance. Data Shapley uniquely satisfies several natural properties of equitable data valuation. We develop Monte Carlo and gradient-based methods to efficiently estimate data Shapley values in practical settings where complex learning algorithms, including neural networks, are trained on large datasets. In addition to being equitable, extensive experiments across biomedical, image and synthetic data demonstrate that data Shapley has several other benefits: 1) it is more powerful than the popular leave-one-out or leverage score in providing insight on what data is more valuable for a given learning task; 2) low Shapley value data effectively capture outliers and corruptions; 3) high Shapley value data inform what type of new data to acquire to improve the predictor.} } 
+ 
+ 
+
+@article{DBLP:journals/corr/abs-2102-10936,
+  author    = {Daniel Fryer and
+               Inga Str{\"{u}}mke and
+               Hien Nguyen},
+  title     = {Shapley values for feature selection: The good, the bad, and the axioms},
+  journal   = {CoRR},
+  volume    = {abs/2102.10936},
+  year      = {2021},
+  archivePrefix = {arXiv},
+  eprint    = {2102.10936},
+  timestamp = {Wed, 24 Feb 2021 15:42:45 +0100},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@article{SAGE_covert,
+  author    = {Ian Covert and
+               Scott Lundberg and
+               Su{-}In Lee},
+  title     = {Understanding Global Feature Contributions Through Additive Importance
+               Measures},
+  journal   = {CoRR},
+  volume    = {abs/2004.00668},
+  year      = {2020},
+  archivePrefix = {arXiv},
+  eprint    = {2004.00668},
+  timestamp = {Wed, 08 Apr 2020 17:08:25 +0200},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@article{explain_by_remove_covert,
+  author    = {Ian Covert and
+               Scott Lundberg and
+               Su{-}In Lee},
+  title     = {Explaining by Removing: {A} Unified Framework for Model Explanation},
+  journal   = {CoRR},
+  volume    = {abs/2011.14878},
+  year      = {2020},
+  archivePrefix = {arXiv},
+  eprint    = {2011.14878},
+  timestamp = {Tue, 01 Dec 2020 14:59:59 +0100},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inbook{Shapley_game_theory,
+    author    = {L.S. Shapley},
+    title = {17. A Value for n-Person Games},
+    editor = {Harold William Kuhn and Albert William Tucker},
+    doi = {doi:10.1515/9781400881970-018},
+    booktitle = {Contributions to the Theory of Games (AM-28), Volume II},
+    year = {2016},
+    publisher = {Princeton University Press},
+    pages = {307--318}
+    }
+    
+@article{pearl2012docalculus,
+  author    = {Judea Pearl},
+  title     = {The Do-Calculus Revisited},
+  journal   = {CoRR},
+  volume    = {abs/1210.4852},
+  year      = {2012},
+  timestamp = {Mon, 13 Aug 2018 16:47:01 +0200}
+}
+
+@article{Merrill2019GeneralizedIG,
+  title={Generalized Integrated Gradients: A practical method for explaining diverse ensembles},
+  author={John Merrill and Geoff Ward and S. Kamkar and J. Budzik and Douglas C. Merrill},
+  journal={ArXiv},
+  year={2019},
+  volume={abs/1909.01869}
+}
+
+
+
+@inproceedings{hiddenTechnicalDebtsinMLSsculley,
+  author    = {D. Sculley and Gary Holt and Daniel Golovin and Eugene Davydov and
+               Todd Phillips and Dietmar Ebner and Vinay Chaudhary and Michael Young and
+               Jean{-}Fran{\c{c}}ois Crespo and Dan Dennison},
+  title     = {Hidden Technical Debt in Machine Learning Systems},
+  booktitle = {Annual Conference on Neural Information Processing System},
+  year      = {2015},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@article{DBLP:journals/corr/abs-1301-3524,
+  author    = {Indre Zliobaite},
+  title     = {How good is the Electricity benchmark for evaluating concept drift
+               adaptation},
+  journal   = {CoRR},
+  volume    = {abs/1301.3524},
+  year      = {2013},
+  archivePrefix = {arXiv},
+  eprint    = {1301.3524},
+  timestamp = {Mon, 13 Aug 2018 16:46:21 +0200},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+
+@article{dataset:electricity,
+  author    = {Indre Zliobaite},
+  title     = {How good is the Electricity benchmark for evaluating concept drift
+               adaptation},
+  journal   = {CoRR},
+  volume    = {abs/1301.3524},
+  year      = {2013},
+  archivePrefix = {arXiv},
+  eprint    = {1301.3524},
+  timestamp = {Mon, 13 Aug 2018 16:46:21 +0200},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{lgbm,
+ author = {Ke, Guolin and Meng, Qi and Finley, Thomas and Wang, Taifeng and Chen, Wei and Ma, Weidong and Ye, Qiwei and Liu, Tie-Yan},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {I. Guyon and U. V. Luxburg and S. Bengio and H. Wallach and R. Fergus and S. Vishwanathan and R. Garnett},
+ title = {LightGBM: A Highly Efficient Gradient Boosting Decision Tree},
+ volume = {30},
+ year = {2017}
+}
+
+
+
+
+%DETECTORS FROM THE SURVEY MAYBE THIS IS NOT NEEDED
+%% TO CHECK
+@inproceedings{KSWIN,
+author = {dos Reis, Denis Moreira and Flach, Peter and Matwin, Stan and Batista, Gustavo},
+title = {Fast Unsupervised Online Drift Detection Using Incremental Kolmogorov-Smirnov Test},
+year = {2016},
+isbn = {9781450342322},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+doi = {10.1145/2939672.2939836},
+abstract = {Data stream research has grown rapidly over the last decade. Two major features distinguish data stream from batch learning: stream data are generated on the fly, possibly in a fast and variable rate; and the underlying data distribution can be non-stationary, leading to a phenomenon known as concept drift. Therefore, most of the research on data stream classification focuses on proposing efficient models that can adapt to concept drifts and maintain a stable performance over time. However, specifically for the classification task, the majority of such methods rely on the instantaneous availability of true labels for all already classified instances. This is a strong assumption that is rarely fulfilled in practical applications. Hence there is a clear need for efficient methods that can detect concept drifts in an unsupervised way. One possibility is the well-known Kolmogorov-Smirnov test, a statistical hypothesis test that checks whether two samples differ. This work has two main contributions. The first one is the Incremental Kolmogorov-Smirnov algorithm that allows performing the Kolmogorov-Smirnov hypothesis test instantly using two samples that change over time, where the change is an insertion and/or removal of an observation. Our algorithm employs a randomized tree and is able to perform the insertion and removal operations in O(log N) with high probability and calculate the Kolmogorov-Smirnov test in O(1), where N is the number of sample observations. This is a significant speed-up compared to the O(N log N) cost of the non-incremental implementation. The second contribution is the use of the Incremental Kolmogorov-Smirnov test to detect concept drifts without true labels. Classification algorithms adapted to use the test rely on a limited portion of those labels just to update the classification model after a concept drift is detected.},
+booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+pages = {1545–1554},
+numpages = {10},
+keywords = {cartesian tree, data stream, treap, kolmogorov-smirnov, concept drift, lazy propagation},
+location = {San Francisco, California, USA},
+series = {KDD '16}
+}
+
+
+@article{pagehinkley,
+    author = {Page, E. S.},
+    title = "{Continuous Inspection Schemes}",
+    journal = {Biometrika},
+    volume = {41},
+    number = {1-2},
+    pages = {100-115},
+    year = {1954},
+    month = {06},
+    issn = {0006-3444},
+    doi = {10.1093/biomet/41.1-2.100}
+}
+
+@article{SPRT,
+    author = {Price, Daniel O.},
+    title = "{Sequential Analysis. By Abraham Wald. New York: John Wiley and Sons, Inc., 1947. 212 pp. }",
+    journal = {Social Forces},
+    volume = {27},
+    number = {2},
+    pages = {170-171},
+    year = {1948},
+    month = {12},
+    issn = {0037-7732},
+    doi = {10.2307/2572319},
+}
+
+@InProceedings{DDM,
+    author="Gama, Jo{\~a}o
+    and Medas, Pedro
+    and Castillo, Gladys
+    and Rodrigues, Pedro",
+    editor="Bazzan, Ana L. C.
+    and Labidi, Sofiane",
+    title="Learning with Drift Detection",
+    booktitle="Advances in Artificial Intelligence -- SBIA 2004",
+    year="2004",
+    publisher="Springer Berlin Heidelberg",
+    address="Berlin, Heidelberg",
+    pages="286--295",
+    abstract="Most of the work in machine learning assume that examples are generated at random according to some stationary probability distribution. In this work we study the problem of learning when the distribution that generate the examples changes over time. We present a method for detection of changes in the probability distribution of examples. The idea behind the drift detection method is to control the online error-rate of the algorithm. The training examples are presented in sequence. When a new training example is available, it is classified using the actual model. Statistical theory guarantees that while the distribution is stationary, the error will decrease. When the distribution changes, the error will increase. The method controls the trace of the online error of the algorithm. For the actual context we define a warning level, and a drift level. A new context is declared, if in a sequence of examples, the error increases reaching the warning level at example kw, and the drift level at example kd. This is an indication of a change in the distribution of the examples. The algorithm learns a new model using only the examples since kw. The method was tested with a set of eight artificial datasets and a real world dataset. We used three learning algorithms: a perceptron, a neural network and a decision tree. The experimental results show a good performance detecting drift and with learning the new concept. We also observe that the method is independent of the learning algorithm.",
+    isbn="978-3-540-28645-5"
+}
+
+@article{EDDM,
+    author = {Baena-García, Manuel and Campo-Ávila, José and Fidalgo-Merino, Raúl and Bifet, Albert and Gavald, Ricard and Morales-Bueno, Rafael},
+    year = {2006},
+    month = {01},
+    pages = {},
+    title = {Early Drift Detection Method}
+}
+
+@article{EWMA,
+   author={Ross, Gordon J. and Adams, Niall M. and Tasoulis, Dimitris K. and Hand, David J.},
+   title={Exponentially weighted moving average charts for detecting concept drift},
+   volume={33},
+   ISSN={0167-8655},
+   DOI={10.1016/j.patrec.2011.08.019},
+   number={2},
+   journal={Pattern Recognition Letters},
+   publisher={Elsevier BV},
+   year={2012},
+   month={Jan},
+   pages={191–198}
+}
+
+@InProceedings{SEED,
+    author="Huang, David Tse Jung
+    and Koh, Yun Sing
+    and Dobbie, Gillian
+    and Bifet, Albert",
+    editor="Appice, Annalisa
+    and Rodrigues, Pedro Pereira
+    and Santos Costa, V{\'i}tor
+    and Soares, Carlos
+    and Gama, Jo{\~a}o
+    and Jorge, Al{\'i}pio",
+    title="Drift Detection Using Stream Volatility",
+    booktitle="Machine Learning and Knowledge Discovery in Databases",
+    year="2015",
+    publisher="Springer International Publishing",
+    address="Cham",
+    pages="417--432",
+    abstract="Current methods in data streams that detect concept drifts in the underlying distribution of data look at the distribution difference using statistical measures based on mean and variance. Existing methods are unable to proactively approximate the probability of a concept drift occurring and predict future drift points. We extend the current drift detection design by proposing the use of historical drift trends to estimate the probability of expecting a drift at different points across the stream, which we term the expected drift probability. We offer empirical evidence that applying our expected drift probability with the state-of-the-art drift detector, ADWIN, we can improve the detection performance of ADWIN by significantly reducing the false positive rate. To the best of our knowledge, this is the first work that investigates this idea. We also show that our overall concept can be easily incorporated back onto incremental classifiers such as VFDT and demonstrate that the performance of the classifier is further improved.",
+    isbn="978-3-319-23528-8"
+    }
+    
+@InProceedings{STEPD,
+    author="Nishida, Kyosuke
+    and Yamauchi, Koichiro",
+    editor="Corruble, Vincent
+    and Takeda, Masayuki
+    and Suzuki, Einoshin",
+    title="Detecting Concept Drift Using Statistical Testing",
+    booktitle="Discovery Science",
+    year="2007",
+    publisher="Springer Berlin Heidelberg",
+    address="Berlin, Heidelberg",
+    pages="264--269",
+    abstract="Detecting concept drift is important for dealing with real-world online learning problems. To detect concept drift in a small number of examples, methods that have an online classifier and monitor its prediction errors during the learning have been developed. We have developed such a detection method that uses a statistical test of equal proportions. Experimental results showed that our method performed well in detecting the concept drift in five synthetic datasets that contained various types of concept drift.",
+    isbn="978-3-540-75488-6"
+}
+
+
+
+
+
+
+
+
+
+@misc{frye2020asymmetric,
+      title={Asymmetric Shapley values: incorporating causal knowledge into model-agnostic explainability}, 
+      author={Christopher Frye and Colin Rowat and Ilya Feige},
+      year={2020},
+      eprint={1910.06358},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML}
+}
+
+@article{Janzing2020FeatureRQ,
+  title={Feature relevance quantification in explainable AI: A causality problem},
+  author={Dominik Janzing and Lenon Minorics and Patrick Bl{\"o}baum},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/1910.13413}
+}
+}
