@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import pandas as pd
 from matplotlib.cm import get_cmap
@@ -566,8 +565,8 @@ def plot_violins_shap_noise(single_drift, D_G, selected_methods, results, path=N
     # ax[1].set_ylabel("Noise Rate", fontsize = 22)
     ax[1].set_xlabel("Point index", fontsize=22)
 
-    #ax[0].legend([])
-    #ax[1].legend([])
+    # ax[0].legend([])
+    # ax[1].legend([])
 
     ax[0].tick_params(axis='both', which='major', labelsize=18)
     ax[1].tick_params(axis='both', which='major', labelsize=18)
@@ -576,9 +575,133 @@ def plot_violins_shap_noise(single_drift, D_G, selected_methods, results, path=N
     return (fig, ax)
 
 
+
+
+def plot_violins_shap_noise_TIGHT(single_drift, D_G, selected_methods, results, path=None, set_same_xrange=True):
+
+    for i, f in enumerate(single_drift[:]):
+        D_G = f()
+        # print("#"*20, f"{D_G.drift_name} {D_G.n}", "#"*20)
+
+        if (D_G.noise_rate != 0):
+            df_results_dataset, sep_bar_indexes = get_df_detections(D_G, results,
+                                                                    selected_methods, exp_type="df_reset", path=path, noisy=True)
+        else:
+            df_results_dataset, sep_bar_indexes = get_df_detections(D_G, results,
+                                                                    selected_methods, exp_type="df_reset", path=path, noisy=False)
+        for col in ["retrain_PH_loss", "retrain_KSWIN_0", "retrain_KSWIN.", "retrain_adwin_loss"]:
+            for real_col in df_results_dataset.columns:
+                if (col in real_col):
+                    #    if(col in df_results_dataset.columns):
+                    df_results_dataset = df_results_dataset.drop(columns=[
+                                                                 real_col])
+
+        if (len(df_results_dataset.columns) == 1):
+            df_results_dataset.loc[:, df_results_dataset.columns[0].replace(
+                "_shap_", "_")] = [[] for x in range(len(df_results_dataset))]
+        if (i == 0):
+            df_res_sing_drift = df_results_dataset
+        else:
+            df_res_sing_drift = pd.concat(
+                [df_res_sing_drift, df_results_dataset], axis=1)
+
+    # sort cols by mean detect
+
+    df_res_sing_drift.columns = list(
+        map(lambda x: x+"_0.0" if "_0" not in x else x, df_res_sing_drift.columns))
+    dict_detects_temp = get_detecs(df_res_sing_drift)
+    dict_detects = {}
+    for k, v in dict_detects_temp.items():
+        if (len(v) > 0):
+            dict_detects[k] = int(np.mean(v))
+        else:
+            dict_detects[k] = int(D_G.n)
+    # for k in ['retrain_KSWIN_shap_0.1', 'retrain_KSWIN_shap_0.05', 'retrain_KSWIN_shap_0.0', 'retrain_KSWIN_shap_0.01', 'retrain_KSWIN_shap_0.001', 'retrain_KSWIN_0.1', 'retrain_KSWIN_0.05', 'retrain_KSWIN_0.0', 'retrain_KSWIN_0.01', 'retrain_KSWIN_0.001', 'retrain_KSWIN_0.0', 'retrain_KSWIN_shap_0.5']:
+    #    if k not in dict_detects:
+    #        dict_detects[k]=int(D_G.n)
+    sorted_k = list({k: v for k, v in sorted(
+        dict_detects.items(), key=lambda item: item[1])})
+
+    # print(df_res_sing_drift)
+
+    df_res_sing_drift = df_res_sing_drift[sorted_k]
+    df_res_sing_drift_s = df_res_sing_drift[[
+        x for x in df_res_sing_drift.columns if "shap" not in x]]
+    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=[10, 4])
+    # plot_violins_shap_noise(single_drift, D_G, selected_methods, results, ax=ax[0])
+    colors = [sns.color_palette("Paired")[(2*i+1) % 12]
+              for i in range(len(single_drift))]
+    _ = plot_violins(D_G, df_res_sing_drift_s, ax=ax[0], sep_bar_indexes=sep_bar_indexes,
+                     separate_true_false=False,
+                     colors=colors, plot_single_detects=False)
+
+    df_res_sing_drift_s = df_res_sing_drift[[
+        x for x in df_res_sing_drift.columns if "shap" in x]]
+
+    a = [x.split("_")[-1] for x in sorted_k if "shap" not in x]
+    # a = list(map(lambda x: "0.0" if x in ["shap","adwin","KSWIN", "PH"] else x, a))
+    b = [x.split("_")[-1] for x in sorted_k if "shap" in x]
+    # b = list(map(lambda x: "0.0" if x in ["shap","adwin","KSWIN", "PH"] else x, b)
+    # colors = [sns.color_palette("Paired")[(2*i+1) % 12] for i in range(len(single_drift))]
+    # colors = [sns.color_palette("Paired")[(2*i+1) % 12] for i in [a.index(x) for x in b]]
+
+    _ = plot_violins(D_G, df_res_sing_drift_s, ax=ax[1], sep_bar_indexes=sep_bar_indexes,
+                     separate_true_false=False, path=path,
+                     colors=colors, plot_single_detects=False)
+    ax[0].set_title(selected_methods[0], fontsize=30)
+    ax[1].set_title(selected_methods[0]+"_SHAP", fontsize=30)
+
+    if (set_same_xrange):
+        xmin_0, xmax_0 = ax[0].get_xlim()
+        xmin_1, xmax_1 = ax[1].get_xlim()
+        xmin = min(xmin_0, xmin_1)
+        xmax = max(xmax_0, xmax_1)
+        ax[0].set_xlim(xmin, xmax)
+        ax[1].set_xlim(xmin, xmax)
+
+    handles, previous_labels = ax[0].get_legend_handles_labels()
+    new_labels = [x.split("|")[0] for x in previous_labels]
+    ax[0].legend(handles=handles[::-1], labels=new_labels[::-1], loc="best")
+    ax[0].set_yticklabels([x.split("|")[-1].split("_")[-1]
+                          for x in previous_labels][1:])
+    ax[0].set_yticks(np.linspace(0+1/(2*len(single_drift)), 1-1/(2*len(single_drift)),
+                     len(single_drift)), [x.split("|")[-1].split("_")[-1] for x in previous_labels][1:])
+    ax[0].set_ylabel("Noise Rate", fontsize=22)
+    
+    
+
+    handles, previous_labels = ax[1].get_legend_handles_labels()
+    #print(previous_labels)
+    new_labels = [x.split("|")[0] for x in previous_labels]
+    ax[1].legend(handles=handles[::-1], labels=new_labels[::-1], loc="best")
+    ax[1].set_yticks(np.linspace(0+1/(2*len(single_drift)), 1-1/(2*len(single_drift)),
+                     len(single_drift)), [x.split("|")[-1].split("_")[-1] for x in previous_labels][1:])
+    ax[1].set_yticks([],[])
+    # ax[1].set_ylabel("Noise Rate", fontsize = 22)
+    ax[1].set_xlabel("Point index", fontsize=22)
+
+    #ax[0].legend([])
+    #ax[1].legend([])
+
+    ax[0].tick_params(axis='both', which='major', labelsize=18)
+    ax[1].tick_params(axis='both', which='major', labelsize=18)
+    
+
+    
+    plt.subplots_adjust(wspace=0)
+
+    xlabels = [item.get_text() for item in ax[0].get_xticklabels()]
+    print(xlabels)
+    xlabels[-1] = ''
+    xlabels[-2] = ''
+    ax[0].set_xticklabels(xlabels)
+    ax[0].set_xlabel("Point index", fontsize=22)
+    return (fig, ax)
+
+
 def plot_violins(D_G, df_results, ax=None, sep_bar_indexes=None,
                  separate_true_false=True, save=False, path=None,
-                 colors=None):#TODO: Fix when there is an uneven number of results columns (separation bars are not correct)
+                 colors=None, plot_single_detects=True):  # TODO: Fix when there is an uneven number of results columns (separation bars are not correct)
     df_metrics = get_df_metrics(df_results, drift_start=D_G.drifts[0].start)
 
     dict_detects = get_detecs(df_results)
@@ -596,7 +719,8 @@ def plot_violins(D_G, df_results, ax=None, sep_bar_indexes=None,
 
     for i, col in enumerate(sorted(df_results.columns)):
         # f_d, no_d, precision = df_metrics.loc[["false", "no"], col].values
-        _, _, precision, TP = df_metrics.loc[["false", "no", "prec","TP"], col].values
+        _, _, precision, TP = df_metrics.loc[[
+            "false", "no", "prec", "TP"], col].values
         if (colors == None):
             color = sns.color_palette("Paired")[(2*i+1) % 12]
         else:
@@ -643,14 +767,15 @@ def plot_violins(D_G, df_results, ax=None, sep_bar_indexes=None,
                     violins[arg].set_edgecolor('black')
 
         detecs = [x for x in dict_detects[col] if x > 0]
-        for d in detecs:
-            ymax = i/len(df_results.columns)+(1/len(df_results.columns)
-                                              )/2+(1/len(df_results.columns)/2 + 0.01)
-            ymin = i/len(df_results.columns)+(1/len(df_results.columns)
-                                              )/2-(1/len(df_results.columns)/2 + 0.01)
-            # print(ymin, ymax)
-            ax.vlines(ymin=ymin, ymax=ymax, x=d,
-                      color='orange', alpha=1, zorder=-1)
+        if plot_single_detects:
+            for d in detecs:
+                ymax = i/len(df_results.columns)+(1/len(df_results.columns)
+                                                  )/2+(1/len(df_results.columns)/2 + 0.01)
+                ymin = i/len(df_results.columns)+(1/len(df_results.columns)
+                                                  )/2-(1/len(df_results.columns)/2 + 0.01)
+                # print(ymin, ymax)
+                ax.vlines(ymin=ymin, ymax=ymax, x=d,
+                          color='orange', alpha=1, zorder=-1)
 
     if (sep_bar_indexes is not None):
         xmin, xmax = ax.get_xlim()
@@ -668,11 +793,10 @@ def plot_violins(D_G, df_results, ax=None, sep_bar_indexes=None,
     return (ax)
 
 
-
 def plot_detector_param_noise(df_perf_detector, param_name_str, detector_name, default_perf_if_fail):
-    if("delta" in param_name_str):
+    if ("delta" in param_name_str):
         beautiful_param_name = r"$\delta$"
-    elif("alpha" in param_name_str):
+    elif ("alpha" in param_name_str):
         beautiful_param_name = r"$\alpha$"
     else:
         beautiful_param_name = param_name_str
@@ -693,7 +817,8 @@ def plot_detector_param_noise(df_perf_detector, param_name_str, detector_name, d
     sns.heatmap(data=df_viz.astype(float), ax=ax[0], cmap="Greens")
     ax[0].set_xlabel(beautiful_param_name)
     ax[0].set_ylabel("noise rate")
-    ax[0].set_title(f"{detector_name} success depending on {beautiful_param_name}")
+    ax[0].set_title(
+        f"{detector_name} success depending on {beautiful_param_name}")
 
     param_noise_rate = df_perf_detector.loc[
         :, ["noise_rate", param_name_str, "performance", "success"]
@@ -717,10 +842,11 @@ def plot_detector_param_noise(df_perf_detector, param_name_str, detector_name, d
     sns.heatmap(data=df_viz.astype(float), ax=ax[1], cmap="Greens_r")
     ax[1].set_xlabel(beautiful_param_name)
     ax[1].set_ylabel("noise rate")
-    ax[1].set_title(f"{detector_name} performance depending on {beautiful_param_name}")
-    figure_path = os.environ.get("FIGURES_PATH")
+    ax[1].set_title(
+        f"{detector_name} performance depending on {beautiful_param_name}")
+
     plt.savefig(
-        f"{figure_path}{detector_name}_noise_delta.png"
+        f"/home/bastienzim/Documents/labs2/data/figures/{detector_name}_noise_delta.png"
     )
     return ax
 
@@ -728,9 +854,9 @@ def plot_detector_param_noise(df_perf_detector, param_name_str, detector_name, d
 def plot_detector_noise_scenario(
     df_perf_detector, param_name_str, detector_name, default_perf_if_fail
 ):
-    if("delta" in param_name_str):
+    if ("delta" in param_name_str):
         beautiful_param_name = r"$\delta$"
-    elif("alpha" in param_name_str):
+    elif ("alpha" in param_name_str):
         beautiful_param_name = r"$\alpha$"
     else:
         beautiful_param_name = param_name_str
@@ -750,7 +876,8 @@ def plot_detector_noise_scenario(
     sns.heatmap(data=df_viz.astype(float), ax=ax[0], cmap="Greens")
     ax[0].set_xlabel("noise rate")
     ax[0].set_ylabel("drift_type")
-    ax[0].set_title(f"{detector_name} success depending on {beautiful_param_name}")
+    ax[0].set_title(
+        f"{detector_name} success depending on {beautiful_param_name}")
 
     param_noise_rate = df_perf_detector.loc[
         :, ["noise_rate", "drift_type", "performance", "success"]
@@ -774,14 +901,16 @@ def plot_detector_noise_scenario(
     sns.heatmap(data=df_viz.astype(float), ax=ax[1], cmap="Greens_r")
     ax[1].set_xlabel("noise rate")
     ax[1].set_ylabel("drift_type")
-    ax[1].set_title(f"{detector_name} performance depending on {beautiful_param_name}")
+    ax[1].set_title(
+        f"{detector_name} performance depending on {beautiful_param_name}")
 
     plt.subplots_adjust(wspace=0.4)
-    figure_path = os.environ.get("FIGURES_PATH")
+
     plt.savefig(
-        f"{figure_path}{param_name_str}_noise_scenario.png"
+        f"/home/bastienzim/Documents/labs2/data/figures/{param_name_str}_noise_scenario.png"
     )
     return ax
+
 
 def plot_detector_param_noise_scenario_specific(
     df_perf_detector,
@@ -790,15 +919,15 @@ def plot_detector_param_noise_scenario_specific(
     default_perf_if_fail,
     selected_param_values,
 ):
-    if("delta" in param_name_str):
+    if ("delta" in param_name_str):
         beautiful_param_name = r"$\delta$"
-    elif("alpha" in param_name_str):
+    elif ("alpha" in param_name_str):
         beautiful_param_name = r"$\alpha$"
     else:
         beautiful_param_name = param_name_str
-        
+
     param_noise_rate = df_perf_detector[
-        df_perf_detector.loc[:,param_name_str].isin(selected_param_values)
+        df_perf_detector.loc[:, param_name_str].isin(selected_param_values)
     ].loc[:, ["noise_rate", "drift_type", "success"]]
     df_viz = param_noise_rate.groupby(["noise_rate", "drift_type"]).mean()
     noise_rates = [x[0] for x in df_viz.index]
@@ -813,10 +942,11 @@ def plot_detector_param_noise_scenario_specific(
     sns.heatmap(data=df_viz.astype(float), ax=ax[0], cmap="Greens")
     ax[0].set_xlabel("noise rate")
     ax[0].set_ylabel("drift_type")
-    ax[0].set_title(f"{detector_name} success depending on {beautiful_param_name}")
+    ax[0].set_title(
+        f"{detector_name} success depending on {beautiful_param_name}")
 
     param_noise_rate = df_perf_detector[
-        df_perf_detector.loc[:,param_name_str].isin(selected_param_values)
+        df_perf_detector.loc[:, param_name_str].isin(selected_param_values)
     ].loc[:, ["noise_rate", "drift_type", "performance", "success"]]
     param_noise_rate.loc[:, "performance"] = param_noise_rate[
         ["success", "performance"]
@@ -837,23 +967,26 @@ def plot_detector_param_noise_scenario_specific(
     sns.heatmap(data=df_viz.astype(float), ax=ax[1], cmap="Greens_r")
     ax[1].set_xlabel("noise rate")
     ax[1].set_ylabel("drift_type")
-    ax[1].set_title(f"{detector_name} performance depending on {beautiful_param_name}")
+    ax[1].set_title(
+        f"{detector_name} performance depending on {beautiful_param_name}")
 
     plt.subplots_adjust(wspace=0.4)
-    plt.suptitle(beautiful_param_name+" = " + str(selected_param_values[0]) + " " * 24)
-    figure_path = os.environ.get("FIGURES_PATH")
+    plt.suptitle(beautiful_param_name+" = " +
+                 str(selected_param_values[0]) + " " * 24)
     plt.savefig(
-        f"{figure_path}{param_name_str}_noise_scenario_specific.png"
+        f"/home/bastienzim/Documents/labs2/data/figures/{param_name_str}_noise_scenario_specific.png"
     )
     return ax
 
-def compute_shap_diff(df_scenario, max_noise = 0.25):
+
+def compute_shap_diff(df_scenario, max_noise=0.25):
     """
     Shap - vanilla
     """
     df_res_diff = pd.DataFrame()
     for x in ["KSWIN", "PH", "adwin"]:
-        selected_cols = sorted([col for col in df_scenario.columns if x in col])[::-1]
+        selected_cols = sorted(
+            [col for col in df_scenario.columns if x in col])[::-1]
         # print(f"i.e {selected_cols[0][8:]} is greater than {selected_cols[1][8:]}")
         df = (
             df_scenario[df_scenario.noise_rate <= max_noise]
@@ -864,8 +997,9 @@ def compute_shap_diff(df_scenario, max_noise = 0.25):
         )
         df.loc[:, "prec_diff_" + x] = (
             df.loc[:, selected_cols[0]] - df.loc[:, selected_cols[1]]
-        )#.map("{:,.2f}".format)
+        )  # .map("{:,.2f}".format)
         # print(df)
         # print("#"*100)
-        df_res_diff = pd.concat((df_res_diff, df.loc[:, ["prec_diff_" + x]]), axis=1)
-    return(df_res_diff.astype(float))
+        df_res_diff = pd.concat(
+            (df_res_diff, df.loc[:, ["prec_diff_" + x]]), axis=1)
+    return (df_res_diff.astype(float))
