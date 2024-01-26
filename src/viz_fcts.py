@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 from matplotlib.cm import get_cmap
@@ -844,9 +845,10 @@ def plot_detector_param_noise(df_perf_detector, param_name_str, detector_name, d
     ax[1].set_ylabel("noise rate")
     ax[1].set_title(
         f"{detector_name} performance depending on {beautiful_param_name}")
-
+    path = os.environ.get("FIGURES_PATH")+detector_name.replace(" ","_")+"_noise_"+str(param_name_str)+".pdf"
+    print("SAVED AT",path)
     plt.savefig(
-        f"/home/bastienzim/Documents/labs2/data/figures/{detector_name}_noise_delta.png"
+        path
     )
     return ax
 
@@ -905,9 +907,9 @@ def plot_detector_noise_scenario(
         f"{detector_name} performance depending on {beautiful_param_name}")
 
     plt.subplots_adjust(wspace=0.4)
-
+    path = os.environ.get("FIGURES_PATH")+detector_name.replace(" ","_")+"_noise_scenario.pdf"
     plt.savefig(
-        f"/home/bastienzim/Documents/labs2/data/figures/{param_name_str}_noise_scenario.png"
+        path
     )
     return ax
 
@@ -973,8 +975,9 @@ def plot_detector_param_noise_scenario_specific(
     plt.subplots_adjust(wspace=0.4)
     plt.suptitle(beautiful_param_name+" = " +
                  str(selected_param_values[0]) + " " * 24)
+    path = os.environ.get("FIGURES_PATH")+detector_name.replace(" ","_")+"_noise_scenario_specific.pdf"
     plt.savefig(
-        f"/home/bastienzim/Documents/labs2/data/figures/{param_name_str}_noise_scenario_specific.png"
+        path
     )
     return ax
 
